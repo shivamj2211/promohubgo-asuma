@@ -15,7 +15,7 @@ export default function Login() {
         <div className="text-center mb-8">
           <Link href="/">
             <div className="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-              Colabatr
+              PROMOHUBGO
             </div>
           </Link>
         </div>

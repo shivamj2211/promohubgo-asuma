@@ -5,7 +5,7 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Colabatr - Influencer Marketplace',
+  title: 'PromoHubGo - Influencer Marketplace',
   description: 'Connect with top influencers and brands',
 }
 

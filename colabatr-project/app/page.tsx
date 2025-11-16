@@ -10,7 +10,7 @@ export default function Home() {
       <nav className="border-b border-gray-200 bg-white sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
           <div className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-            Colabatr
+            PromoHubGo
           </div>
           <div className="flex gap-4">
             <Link href="/login">
@@ -35,7 +35,7 @@ export default function Home() {
           </h1>
           
           <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            Colabatr is the marketplace where brands and influencers collaborate to create amazing content and grow together.
+            PromoHubGo is the marketplace where brands and influencers collaborate to create amazing content and grow together.
           </p>
 
           <div className="flex gap-4 justify-center mb-16">
@@ -52,7 +52,7 @@ export default function Home() {
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-3 gap-8 mt-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-16">
             <div className="bg-white rounded-lg p-6 shadow-sm">
               <div className="text-3xl font-bold text-indigo-600">10K+</div>
               <div className="text-gray-600">Influencers</div>
@@ -72,7 +72,7 @@ export default function Home() {
       {/* Features */}
       <div className="bg-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-center mb-16">Why Choose Colabatr?</h2>
+          <h2 className="text-4xl font-bold text-center mb-16">Why Choose PromoHubGo?</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="p-6 border border-gray-200 rounded-lg hover:shadow-lg transition">
@@ -100,7 +100,7 @@ export default function Home() {
       <div className="bg-gradient-to-r from-indigo-600 to-purple-600 py-16 text-white">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl font-bold mb-4">Ready to Collaborate?</h2>
-          <p className="text-lg mb-8 opacity-90">Join thousands of brands and influencers already using Colabatr.</p>
+          <p className="text-lg mb-8 opacity-90">Join thousands of brands and influencers already using PromoHubGo.</p>
           <Link href="/signup">
             <Button size="lg" className="bg-white text-indigo-600 hover:bg-gray-100">
               Start Now
