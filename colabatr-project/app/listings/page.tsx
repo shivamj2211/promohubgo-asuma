@@ -98,7 +98,7 @@ export default function Listings() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
           <Link href="/">
             <div className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-              Colabatr
+              PromoHubGo
             </div>
           </Link>
           <div className="flex gap-4">
