@@ -27,9 +27,35 @@ export default function Signup() {
     password: false,
     confirmPassword: false,
   })
+  const [passwordValidationError, setPasswordValidationError] = useState('')
+  const [emailValidationError, setEmailValidationError] = useState('')
+
+  const validateEmail = (email: string) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!regex.test(email)) {
+      setEmailValidationError('Please enter a valid email address (e.g., you@gmail.com)')
+    } else {
+      setEmailValidationError('')
+    }
+  }
+
+  const validatePassword = (pwd: string) => {
+    const regex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@])[A-Za-z\d@]{8,14}$/
+    if (!regex.test(pwd)) {
+      setPasswordValidationError('Password must be 8-14 characters, include at least one uppercase letter, one number, and only @ as special character. No spaces allowed.')
+    } else {
+      setPasswordValidationError('')
+    }
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target
+    if (name === 'password') {
+      validatePassword(value)
+    }
+    if (name === 'email') {
+      validateEmail(value)
+    }
     setFormData(prev => ({ ...prev, [name]: value }))
   }
 
@@ -61,7 +87,7 @@ export default function Signup() {
   // Validation checks
   const nameError = touched.name && !formData.name
   const emailError = touched.email && !formData.email
-  const passwordError = touched.password && !formData.password
+  const passwordRequiredError = touched.password && !formData.password
   const confirmPasswordError = touched.confirmPassword && !formData.confirmPassword
 
   return (
@@ -116,16 +142,23 @@ export default function Signup() {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                onBlur={() => handleBlur('email')}
-                placeholder="you@example.com"
+                onBlur={() => {
+                  handleBlur('email')
+                  validateEmail(formData.email)
+                }}
+                placeholder="you@gmail.com"
                 className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
                   emailError
                     ? 'border-red-500 focus:ring-red-600'
                     : 'border-gray-300 focus:ring-indigo-600'
                 }`}
               />
+              <p className="text-gray-500 text-xs mt-1">Example: you@gmail.com or you@domain.com</p>
               {emailError && (
                 <p className="text-red-500 text-sm mt-1">Email is required</p>
+              )}
+              {emailValidationError && (
+                <p className="text-red-500 text-sm mt-1">{emailValidationError}</p>
               )}
             </div>
 
@@ -157,7 +190,7 @@ export default function Signup() {
                   onBlur={() => handleBlur('password')}
                   placeholder="••••••••"
                   className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 pr-10 ${
-                    passwordError
+                    passwordRequiredError || passwordValidationError
                       ? 'border-red-500 focus:ring-red-600'
                       : 'border-gray-300 focus:ring-indigo-600'
                   }`}
@@ -179,8 +212,11 @@ export default function Signup() {
                   )}
                 </button>
               </div>
-              {passwordError && (
+              {passwordRequiredError && (
                 <p className="text-red-500 text-sm mt-1">Password is required</p>
+              )}
+              {passwordValidationError && (
+                <p className="text-red-500 text-sm mt-1">{passwordValidationError}</p>
               )}
             </div>
 

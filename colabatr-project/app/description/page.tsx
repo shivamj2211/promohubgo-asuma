@@ -10,7 +10,7 @@ export default function DescriptionPage() {
   const router = useRouter()
   const [description, setDescription] = useState('')
   const [suggestions, setSuggestions] = useState<string[]>([])
-  const WORD_LIMIT = 1000
+  const WORD_LIMIT = 200
     
   // ---- helpers ----
   const countWords = (text: string): number => {
