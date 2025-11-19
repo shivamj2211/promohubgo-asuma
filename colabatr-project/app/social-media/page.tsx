@@ -4,7 +4,7 @@ import { useState, type ComponentType } from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
-
+import { ExampleProfileDialog } from '@/components/exampleprofile/exapmleprofile'
 import {
   ChevronLeft,
   Instagram,
@@ -173,9 +173,11 @@ const handleSkip = () => {
             Back
           </Link>
 
-          <button className="px-3 py-1.5 rounded-full border text-xs font-medium text-gray-800 bg-gray-100">
-            View Example Profile
-          </button>
+       
+
+
+<ExampleProfileDialog />
+
 
           <div className="w-5" />
         </div>
