@@ -12,7 +12,9 @@ export default function Signup() {
     email: '',
     password: '',
     confirmPassword: '',
-    userType: 'buyer',
+    phone: '',
+    countryCode: '+91',
+    userType: '',
   })
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
@@ -26,7 +28,9 @@ export default function Signup() {
     email: false,
     password: false,
     confirmPassword: false,
+    phone: false,
   })
+  const [phoneValidationError, setPhoneValidationError] = useState('')
   const [passwordValidationError, setPasswordValidationError] = useState('')
   const [emailValidationError, setEmailValidationError] = useState('')
 
@@ -37,6 +41,41 @@ export default function Signup() {
     } else {
       setEmailValidationError('')
     }
+  }
+
+  const validatePhone = (phone: string, countryCode: string) => {
+    const digits = phone.replace(/\D/g, '')
+    // India specific: +91 -> 10 digits
+    if (countryCode === '+91') {
+      if (digits.length !== 10) {
+        setPhoneValidationError('For India (+91) phone number must be exactly 10 digits')
+        return
+      }
+    } else {
+      // Generic rule: allow 6-15 digits for other countries
+      if (digits.length < 6 || digits.length > 15) {
+        setPhoneValidationError('Please enter a valid phone number (6-15 digits)')
+        return
+      }
+    }
+
+    setPhoneValidationError('')
+  }
+
+  const formatPhoneForCountry = (countryCode: string, digits: string) => {
+    const d = digits.replace(/\D/g, '')
+    if (!d) return ''
+    if (countryCode === '+91') {
+      // Format as XXX-XXX-XXXX for display
+      const part1 = d.slice(0, 3)
+      const part2 = d.slice(3, 6)
+      const part3 = d.slice(6, 10)
+      if (d.length <= 3) return part1
+      if (d.length <= 6) return `${part1}-${part2}`
+      return `${part1}-${part2}-${part3}`
+    }
+    // Generic grouping: groups of 3 then remaining
+    return d.replace(/(\d{3})(?=\d)/g, '$1-')
   }
 
   const validatePassword = (pwd: string) => {
@@ -55,6 +94,20 @@ export default function Signup() {
     }
     if (name === 'email') {
       validateEmail(value)
+    }
+    if (name === 'phone') {
+      // keep only digits in phone field
+      const digits = value.replace(/\D/g, '')
+      // validate on each change but final validation on blur
+      validatePhone(digits, (formData.countryCode as string) || '+91')
+      setFormData(prev => ({ ...prev, [name]: digits }))
+      return
+    }
+    if (name === 'countryCode') {
+      // when country changes, re-validate existing phone
+      setFormData(prev => ({ ...prev, [name]: value }))
+      validatePhone(formData.phone, value)
+      return
     }
     setFormData(prev => ({ ...prev, [name]: value }))
   }
@@ -89,6 +142,7 @@ export default function Signup() {
   const emailError = touched.email && !formData.email
   const passwordRequiredError = touched.password && !formData.password
   const confirmPasswordError = touched.confirmPassword && !formData.confirmPassword
+  const phoneError = touched.phone && !formData.phone
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 to-purple-50">
@@ -162,6 +216,49 @@ export default function Signup() {
               )}
             </div>
 
+            {/* Phone with country code */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Phone number</label>
+              <div className="flex gap-2">
+                <select
+                  name="countryCode"
+                  value={formData.countryCode}
+                  onChange={handleChange}
+                  className="px-3 py-2 border border-gray-300 rounded-lg bg-white"
+                >
+                  <option value="+91">India (+91)</option>
+                  <option value="+1">USA (+1)</option>
+                  <option value="+44">UK (+44)</option>
+                  <option value="+61">Australia (+61)</option>
+                </select>
+
+                <input
+                  type="text"
+                  name="phone"
+                  value={formatPhoneForCountry(formData.countryCode, formData.phone)}
+                  onChange={handleChange}
+                  onBlur={() => {
+                    handleBlur('phone')
+                    validatePhone(formData.phone, formData.countryCode)
+                  }}
+                  placeholder={formData.countryCode === '+91' ? '123-456-7890' : '123-456-7890'}
+                  maxLength={formData.countryCode === '+91' ? 12 : 20}
+                  className={`flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
+                    phoneError || phoneValidationError
+                      ? 'border-red-500 focus:ring-red-600'
+                      : 'border-gray-300 focus:ring-indigo-600'
+                  }`}
+                />
+              </div>
+              <p className="text-gray-500 text-xs mt-1">Include country code from the selector. For India enter 10 digits.</p>
+              {phoneError && (
+                <p className="text-red-500 text-sm mt-1">Phone number is required</p>
+              )}
+              {phoneValidationError && (
+                <p className="text-red-500 text-sm mt-1">{phoneValidationError}</p>
+              )}
+            </div>
+
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 I am a
@@ -172,6 +269,7 @@ export default function Signup() {
                 onChange={handleChange}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-600"
               >
+                <option value="">-- Select option --</option>
                 <option value="buyer">Brand (Looking for Influencers)</option>
                 <option value="seller">Influencer (Offering Services)</option>
               </select>
@@ -284,7 +382,16 @@ export default function Signup() {
 
             <Button 
               className="w-full bg-indigo-600 hover:bg-indigo-700 py-2 disabled:opacity-50 disabled:cursor-not-allowed"
-              disabled={!passwordsMatch || !formData.name || !formData.email || !termsAccepted}
+              disabled={
+                !passwordsMatch ||
+                !formData.name ||
+                !formData.email ||
+                !formData.phone ||
+                !formData.userType ||
+                !!phoneValidationError ||
+                !!emailValidationError ||
+                !termsAccepted
+              }
               onClick={handleCreateAccount}
             >
               Create Account
