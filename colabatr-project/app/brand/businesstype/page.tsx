@@ -1,7 +1,7 @@
 /*
  * Step three in the brand onboarding sequence.  Brands select the
  * category that best describes their business.  Only one option may
- * be chosen.  A progress bar shows the user is 60 % through the
+ * bechosen.
  * onboarding.  Continue remains disabled until a choice is made.
  */
 'use client'

@@ -37,9 +37,9 @@ export default function BrandPage() {
       {/* Main content */}
       <main className="flex-1 max-w-7xl mx-auto px-4 py-8">
         <section className="mb-10">
-          <h2 className="text-3xl font-bold mb-2 text-gray-900">Here's 100+ Influencers for <span className="text-indigo-600">General</span>!</h2>
+          <h2 className="text-3xl font-bold mb-2 text-gray-900">Here is 100+ Influencers for <span className="text-indigo-600">General</span>!</h2>
           <p className="text-gray-600 max-w-2xl mb-6">
-            You're all set! Browse top influencers & start ordering high‑quality content from thousands of creators on promoHubgo.
+            You are all set! Browse top influencers & start ordering high‑quality content from thousands of creators on promoHubgo.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="flex items-start space-x-3">

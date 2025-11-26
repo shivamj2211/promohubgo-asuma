@@ -2,7 +2,7 @@
  * This page represents the first step of the brand‑onboarding flow.
  * The user is asked what they are here to do and must pick exactly one option
  * before continuing. The progress bar at the top reflects that this is the
- * first of five onboarding steps (20 %). When the Continue button is
+
  * pressed, the router moves on to the next page (budget1).
  */
 'use client'
@@ -98,7 +98,7 @@ export default function HereToDoPage() {
     }
   }
 
-  // The progress value for the first step (20 %).  We calculate this
+  
   // explicitly rather than deriving from length to avoid magic numbers.
   const progress = 20
 
