@@ -33,13 +33,13 @@ export default function BudgetPage() {
 
   const handleContinue = () => {
     // Persist selected budget here if needed
-    router.push('/bustype2')
+    router.push('/brand/bussinesstype')
   }
 
   const handleSkip = () => {
     // Skip budget – you may want to store null or undefined
     setSelected('')
-    router.push('/bustype2')
+    router.push('/brand/bussinesstype')
   }
 
   return (

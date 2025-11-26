@@ -94,7 +94,7 @@ export default function HereToDoPage() {
   // context or local storage for later use.
   const handleContinue = () => {
     if (selected) {
-      router.push('/budget1')
+      router.push('/brand/approximatebudget')
     }
   }
 

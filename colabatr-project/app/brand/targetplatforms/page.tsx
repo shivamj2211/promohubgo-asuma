@@ -25,7 +25,7 @@ export default function PlatformTargetPage() {
     { value: 'ugc', label: 'User Generated Content' },
     { value: 'youtube', label: 'YouTube' },
     { value: 'twitter', label: 'Twitter' },
-    { value: 'twitch', label: 'Twitch' },
+    { value: 'facebook', label: 'Facebook' },
   ]
 
   const progress = 100
@@ -40,7 +40,7 @@ export default function PlatformTargetPage() {
 
   const handleContinue = () => {
     if (selected.length > 0) {
-      router.push('/welcomeafterbrand')
+      router.push('/branddashboard/brandwelcom')
     }
   }
 

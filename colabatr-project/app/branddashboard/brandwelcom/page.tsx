@@ -10,7 +10,7 @@
 
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-import BrandPage from './brandpage'
+import BrandPage from '../brandmain/page.tsx'
 
 export default function WelcomeAfterBrand() {
   const router = useRouter()
@@ -21,7 +21,7 @@ export default function WelcomeAfterBrand() {
       setStep(step + 1)
     } else {
       // End of tour
-      router.push('/brandpage')
+      router.push('/branddashboard/brandmain')
     }
   }
 

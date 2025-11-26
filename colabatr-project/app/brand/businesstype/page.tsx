@@ -126,7 +126,7 @@ export default function BusinessTypePage() {
 
   const handleContinue = () => {
     if (selected) {
-      router.push('/influencertypeyouneed4')
+      router.push('/brand/selectinfluencer')
     }
   }
 

@@ -62,7 +62,7 @@ export default function InfluencerTypePage() {
 
   const handleContinue = () => {
     if (selected.length > 0) {
-      router.push('/platformtarget5')
+      router.push('/brand/targetplatforms')
     }
   }
 
