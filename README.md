@@ -12,7 +12,7 @@ A full-stack Next.js application inspired by Collabstr for connecting content cr
 
 ### 1. Install Dependencies
 ```bash
-cd colabatr-project
+cd promohub-project
 npm install
 ```
 
@@ -20,7 +20,7 @@ npm install
 Create `.env.local` file:
 ```bash
 # Database
-DATABASE_URL="postgresql://user:password@localhost:5432/colabatr"
+DATABASE_URL="postgresql://user:password@localhost:5432/promohub"
 
 # NextAuth
 NEXTAUTH_URL="http://localhost:3000"
@@ -82,7 +82,7 @@ npm run test:e2e:ui  # Run E2E tests with UI
 ## 🗂️ Project Structure
 
 ```
-colabatr-project/
+promohub-project/
 ├── app/                    # Next.js app directory (pages & API routes)
 ├── components/             # React components
 │   ├── ui/                # Reusable UI components
@@ -261,8 +261,8 @@ vercel
 
 ### Docker
 ```bash
-docker build -t colabatr .
-docker run -p 3000:3000 colabatr
+docker build -t promohub .
+docker run -p 3000:3000 promohub
 ```
 
 ---
