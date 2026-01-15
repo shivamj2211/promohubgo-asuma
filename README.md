@@ -1,4 +1,4 @@
-# Colabatr - Influencer Marketplace
+# promohub - Influencer Marketplace
 
 A full-stack Next.js application inspired by Collabstr for connecting content creators with brands.
 
